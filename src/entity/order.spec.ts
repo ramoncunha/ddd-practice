@@ -22,20 +22,28 @@ describe("Order Unit Test", () => {
 
         expect(() => {
             new Order("123", "123", []);
-        }).toThrowError("Items quantity must be greater than 0");
+        }).toThrowError("Items are required");
     });
 
     it("should calculate total", () => {
-        const item = new OrderItem("1", "MacBook Pro", 13000);
-        const item2 = new OrderItem("1", "MacBook Air", 6000);
+        const item = new OrderItem("1", "p1", "Order1", 13000, 2);
+        const item2 = new OrderItem("1", "p2", "Order2", 6000, 2);
         const order = new Order("1", "1", [item]);
         let total = order.total();
 
-        expect(total).toBe(13000);
+        expect(total).toBe(26000);
 
         const order2 = new Order("1", "1", [item, item2]);
         total = order2.total();
 
-        expect(total).toBe(19000);
+        expect(total).toBe(38000);
+    });
+
+    it("should throw error if the item quantity is greater than 0", () => {
+
+        expect(() => {
+            const item = new OrderItem("1", "p1", "Order1", 100, 0);
+            const order = new Order("1", "1", [item]);
+        }).toThrowError("Items quantity must be greater than 0");
     });
 });
