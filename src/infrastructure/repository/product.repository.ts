@@ -12,6 +12,7 @@ export default class ProductRepository implements ProductRepositoryInterface {
             price: entity.price
         });
     }
+
     async update(entity: Product): Promise<void> {
         
         await ProductModel.update(
