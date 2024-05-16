@@ -6,9 +6,9 @@ import ProductRepository from "./product.repository";
 import Product from "../../domain/entity/product";
 import OrderItem from "../../domain/entity/order_item";
 import Order from "../../domain/entity/order";
-import { where } from "sequelize";
 import OrderModel from "../db/sequelize/model/order.model";
-
+import OrderRepository from "./order.repository";
+import CustomerModel from "../db/sequelize/model/customer.model";
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
@@ -21,7 +21,9 @@ describe("Order repository test", () => {
       sync: { force: true },
     });
 
-    await sequelize.addModels([CustomerModel]);
+    await sequelize.addModels([
+      CustomerModel,
+    ]);
     await sequelize.sync();
   });
 
@@ -45,7 +47,7 @@ describe("Order repository test", () => {
     const order = new Order("123", customer.id, [orderItem])
 
     const orderRepository = new OrderRepository();
-    await orderRepository.create(orderItem);
+    await orderRepository.create(order);
 
     const orderModel = await OrderModel.findOne({
       where: { id: order.id },
@@ -62,7 +64,8 @@ describe("Order repository test", () => {
           name: orderItem.name,
           price: orderItem.price,
           quantity: orderItem.quantity,
-          order_id: "123"
+          order_id: "123",
+          product_id: "123",
         },
       ],
     })
