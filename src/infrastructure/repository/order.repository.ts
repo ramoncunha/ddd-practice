@@ -3,10 +3,6 @@ import OrderItemModel from "../db/sequelize/model/order-item.model";
 import OrderModel from "../db/sequelize/model/order.model";
 
 export default class OrderRepository  {
-  
-  findById(id: string): Promise<Order> {
-    throw new Error("Method not implemented.");
-  }
 
   async create(entity: Order): Promise<void> {
     await OrderModel.create({

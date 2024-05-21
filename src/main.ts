@@ -12,7 +12,7 @@ customer.activate();
 // Association by ID
 
 // Order Aggregate
-const item1 = new OrderItem("1", "Product 1", 1, 10);
-const item2 = new OrderItem("1", "Product 2", 1, 10);
+const item1 = new OrderItem("1", "Product 1", "1", 10, 1);
+const item2 = new OrderItem("1", "Product 2", "1", 10, 1);
 // OrderItem e Order - association by entity
 const order = new Order("1", "1", [item1, item2]);

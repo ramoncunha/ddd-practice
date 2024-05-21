@@ -9,6 +9,8 @@ import Order from "../../domain/entity/order";
 import OrderModel from "../db/sequelize/model/order.model";
 import OrderRepository from "./order.repository";
 import CustomerModel from "../db/sequelize/model/customer.model";
+import OrderItemModel from "../db/sequelize/model/order-item.model";
+import ProductModel from "../db/sequelize/model/produto.model";
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
@@ -23,6 +25,9 @@ describe("Order repository test", () => {
 
     await sequelize.addModels([
       CustomerModel,
+      OrderModel,
+      OrderItemModel,
+      ProductModel,
     ]);
     await sequelize.sync();
   });
@@ -35,16 +40,19 @@ describe("Order repository test", () => {
     const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "John Doe");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
-
     customer.changeAddress(address);
     await customerRepository.create(customer);
 
     const productRepository = new ProductRepository();
     const product = new Product("123", "Product 1", 10);
-    await productRepository.create(product)
+    await productRepository.create(product);
 
-    const orderItem = new OrderItem("123", "Item Name", product.id, product.price, 1);
-    const order = new Order("123", customer.id, [orderItem])
+    const orderItem = new OrderItem("123",
+    "Item Name",
+    product.id,
+    product.price,
+    2);
+    const order = new Order("123", customer.id, [orderItem]);
 
     const orderRepository = new OrderRepository();
     await orderRepository.create(order);
@@ -54,9 +62,9 @@ describe("Order repository test", () => {
       include: ["items"],
     });
 
-    expect(orderModel?.toJSON).toStrictEqual({
+    expect(orderModel.toJSON).toStrictEqual({
       id: "123",
-      customer_id: "123",
+      customer_id: customer.id,
       total: order.total(),
       items: [
         {

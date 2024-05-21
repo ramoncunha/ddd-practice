@@ -26,8 +26,8 @@ describe("Order Unit Test", () => {
     });
 
     it("should calculate total", () => {
-        const item = new OrderItem("1", "p1", 13000, 2);
-        const item2 = new OrderItem("1", "p2", 6000, 2);
+        const item = new OrderItem("1", "p1", "1", 13000, 2);
+        const item2 = new OrderItem("1", "p2", "2", 6000, 2);
         const order = new Order("1", "1", [item]);
         let total = order.total();
 
@@ -42,7 +42,7 @@ describe("Order Unit Test", () => {
     it("should throw error if the item quantity is greater than 0", () => {
 
         expect(() => {
-            const item = new OrderItem("1", "p1", 100, 0);
+            const item = new OrderItem("1", "p1", "100", 0, 0);
             const order = new Order("1", "1", [item]);
         }).toThrowError("Items quantity must be greater than 0");
     });

@@ -41,5 +41,4 @@ export default class OrderItemModel extends Model {
 
   @Column({ allowNull: false })
   declare price: number;
-
 }

@@ -7,7 +7,7 @@ describe("Order Service Unit Test", () => {
 
     it("should place an order", () => {
         const customer = new Customer("1", "Customer 1");
-        const orderItem = new OrderItem("1", "Product 1", 10, 1);
+        const orderItem = new OrderItem("1", "Product 1", "10", 2, 5);
         const order = OrderService.placeOrder(customer, [orderItem]);
 
         expect(order.total()).toBe(10);
@@ -15,8 +15,8 @@ describe("Order Service Unit Test", () => {
     });
 
     it("should get total of all order", () => {
-        const orderItem = new OrderItem("1", "Product1", 100, 1);
-        const orderItem2 = new OrderItem("1", "Product1", 300, 1);
+        const orderItem = new OrderItem("1", "Product1", "1", 100, 1);
+        const orderItem2 = new OrderItem("1", "Product1", "2", 300, 1);
         const order = new Order("1", "C1", [orderItem]);
         const order2 = new Order("2", "C2", [orderItem2]);
 
