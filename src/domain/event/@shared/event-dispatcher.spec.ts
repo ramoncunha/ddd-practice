@@ -1,3 +1,4 @@
+import SendEmailWhenProductIsCreatedHandler from "../product/handler/send-email-when-product-is-created.handler";
 import EventDispatcher from "./event-dispatcher";
 
 describe("Domain Events Tests", () => {
@@ -10,5 +11,6 @@ describe("Domain Events Tests", () => {
     
     expect(eventDispatcher.getEventHandlers["ProductCreatedEvent"]).toBeDefined();
     expect(eventDispatcher.getEventHandlers["ProductCreatedEvent"].length ).toBe(1);
+    expect(eventDispatcher.getEventHandlers["ProductCreatedEvent"][0]).toMatchObject(eventHandler);
   });
 })
