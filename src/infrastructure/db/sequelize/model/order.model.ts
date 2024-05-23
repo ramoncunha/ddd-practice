@@ -12,10 +12,9 @@ import OrderItemModel from "./order-item.model";
 
 @Table({
   tableName: "orders",
-  timestamps: false
+  timestamps: false,
 })
 export default class OrderModel extends Model {
-
   @PrimaryKey
   @Column
   declare id: string;
