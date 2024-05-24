@@ -12,7 +12,7 @@ export default class ProductFactory {
       case "Custom":
         return new ProductCustom(uuid(), name, price);
       default:
-        throw new Error("Product type incorrect");
+        throw new Error("Product type not unsupported");
     }
   }
 }
